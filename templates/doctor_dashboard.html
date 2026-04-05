@@ -1,0 +1,65 @@
+{% extends "doctor_base.html" %}
+{% block title %}Dashboard{% endblock %}
+{% block content %}
+<header class="main-header">
+  <h1>{{ greeting }}, Doctor</h1>
+  <p class="date-line">{{ today_display }}</p>
+</header>
+
+<p class="section-title">Appointment slots</p>
+
+{% for slot in slots %}
+<div class="slot-day">
+  <h2>{{ slot.display_date }}</h2>
+  <div class="card-grid">
+    <article class="appointment-card">
+      <span class="time-label">Slot</span>
+      <span class="time-value">Morning</span>
+      <span class="status-pill slot-line {{ slot.morning.line_class }}">{{ slot.morning.line_text }}</span>
+      {% if slot.morning.attend %}
+      <form class="attend-form" method="post" action="{{ url_for('doctor_attend') }}">
+        <input type="hidden" name="date" value="{{ slot.date_key }}">
+        <input type="hidden" name="slot" value="morning">
+        <button class="btn-attend" type="submit">Mark as Attended</button>
+      </form>
+      {% endif %}
+      {% if slot.morning.followup_form %}
+      <form class="followup-form" method="post" action="{{ url_for('doctor_follow_up') }}">
+        <input type="hidden" name="date" value="{{ slot.date_key }}">
+        <input type="hidden" name="slot" value="morning">
+        <label class="followup-label" for="fu-m-{{ loop.index }}">Follow-up date (optional)</label>
+        <input class="followup-input" id="fu-m-{{ loop.index }}" type="date" name="follow_up" value="{{ slot.morning.follow_up_value }}">
+        <button class="btn-followup" type="submit">Save follow-up</button>
+      </form>
+      {% endif %}
+    </article>
+    <article class="appointment-card">
+      <span class="time-label">Slot</span>
+      <span class="time-value">Evening</span>
+      <span class="status-pill slot-line {{ slot.evening.line_class }}">{{ slot.evening.line_text }}</span>
+      {% if slot.evening.attend %}
+      <form class="attend-form" method="post" action="{{ url_for('doctor_attend') }}">
+        <input type="hidden" name="date" value="{{ slot.date_key }}">
+        <input type="hidden" name="slot" value="evening">
+        <button class="btn-attend" type="submit">Mark as Attended</button>
+      </form>
+      {% endif %}
+      {% if slot.evening.followup_form %}
+      <form class="followup-form" method="post" action="{{ url_for('doctor_follow_up') }}">
+        <input type="hidden" name="date" value="{{ slot.date_key }}">
+        <input type="hidden" name="slot" value="evening">
+        <label class="followup-label" for="fu-e-{{ loop.index }}">Follow-up date (optional)</label>
+        <input class="followup-input" id="fu-e-{{ loop.index }}" type="date" name="follow_up" value="{{ slot.evening.follow_up_value }}">
+        <button class="btn-followup" type="submit">Save follow-up</button>
+      </form>
+      {% endif %}
+    </article>
+  </div>
+</div>
+{% else %}
+<div class="placeholder-panel">
+  <h2>No slots configured</h2>
+  <p>There are no rows in the schedule yet. After patients book via Telegram, refresh this page to see Morning and Evening status.</p>
+</div>
+{% endfor %}
+{% endblock %}

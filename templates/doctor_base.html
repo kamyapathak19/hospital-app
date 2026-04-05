@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}Doctor Portal{% endblock %} — Pathak Clinic</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/doctor.css') }}">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="sidebar-brand">
+        <div class="name">Pathak Clinic</div>
+        <div class="role">Doctor portal</div>
+      </div>
+      <nav class="sidebar-nav">
+        <a href="{{ url_for('doctor_dashboard') }}" class="{{ 'active' if active_nav == 'dashboard' else '' }}">Dashboard</a>
+        <a href="{{ url_for('doctor_patients') }}" class="{{ 'active' if active_nav == 'patients' else '' }}">Patients</a>
+        <a href="{{ url_for('doctor_analytics') }}" class="{{ 'active' if active_nav == 'analytics' else '' }}">Analytics</a>
+      </nav>
+      <div class="sidebar-footer">
+        <a href="{{ url_for('login') }}">Sign out</a>
+      </div>
+    </aside>
+    <main class="main">
+      {% block content %}{% endblock %}
+    </main>
+  </div>
+</body>
+</html>

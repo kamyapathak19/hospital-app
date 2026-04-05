@@ -1,0 +1,684 @@
+/* Doctor portal — soft blue / white, card layout */
+
+:root {
+  --bg: #e8f2fb;
+  --surface: #ffffff;
+  --sidebar: #1e4d7b;
+  --sidebar-hover: #2a5f94;
+  --accent: #4a90c8;
+  --accent-soft: #d4e8f7;
+  --text: #1a2f45;
+  --text-muted: #5a6f82;
+  --border: #c5d9eb;
+  --success-bg: #e6f4ea;
+  --success-text: #1b5e20;
+  --neutral-bg: #f0f4f8;
+  --neutral-text: #455a64;
+  --shadow: 0 4px 20px rgba(30, 77, 123, 0.08);
+  --radius: 12px;
+  --sidebar-width: 240px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  line-height: 1.5;
+}
+
+/* —— Login (full page, no sidebar) —— */
+.login-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: linear-gradient(160deg, #d4e8f7 0%, #e8f2fb 45%, #f5f9fc 100%);
+}
+
+.login-card {
+  width: 100%;
+  max-width: 400px;
+  background: var(--surface);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 2.25rem 2rem;
+  border: 1px solid var(--border);
+}
+
+.login-card h1 {
+  margin: 0 0 0.35rem;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.login-card .subtitle {
+  margin: 0 0 1.75rem;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+
+.login-card label {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 500;
+  margin-bottom: 0.35rem;
+  color: var(--text);
+}
+
+.login-card input[type="text"],
+.login-card input[type="password"] {
+  width: 100%;
+  padding: 0.65rem 0.85rem;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  background: #fafcfe;
+}
+
+.login-card input:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-soft);
+}
+
+.login-card .field {
+  margin-bottom: 0.25rem;
+}
+
+.btn-primary {
+  width: 100%;
+  margin-top: 0.5rem;
+  padding: 0.75rem 1rem;
+  border: none;
+  border-radius: 8px;
+  background: var(--sidebar);
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.btn-primary:hover {
+  background: var(--sidebar-hover);
+}
+
+.alert-error {
+  margin-bottom: 1rem;
+  padding: 0.65rem 0.85rem;
+  border-radius: 8px;
+  background: #fdecea;
+  color: #c62828;
+  font-size: 0.9rem;
+  border: 1px solid #f5c6c2;
+}
+
+/* —— App shell (sidebar + main) —— */
+.app-shell {
+  display: flex;
+  min-height: 100vh;
+}
+
+.sidebar {
+  width: var(--sidebar-width);
+  flex-shrink: 0;
+  background: var(--sidebar);
+  color: #e8f2fb;
+  padding: 1.5rem 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar-brand {
+  padding: 0 1.25rem 1.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  margin-bottom: 1rem;
+}
+
+.sidebar-brand .name {
+  font-weight: 700;
+  font-size: 1.05rem;
+  letter-spacing: 0.02em;
+}
+
+.sidebar-brand .role {
+  font-size: 0.75rem;
+  opacity: 0.75;
+  margin-top: 0.2rem;
+}
+
+.sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  padding: 0 0.75rem;
+  flex: 1;
+}
+
+.sidebar-nav a {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.65rem 0.85rem;
+  border-radius: 8px;
+  color: #cfe4f7;
+  text-decoration: none;
+  font-size: 0.95rem;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.sidebar-nav a:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+}
+
+.sidebar-nav a.active {
+  background: rgba(255, 255, 255, 0.15);
+  color: #fff;
+  font-weight: 600;
+}
+
+.sidebar-footer {
+  padding: 1rem 1.25rem 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  margin-top: auto;
+}
+
+.sidebar-footer a {
+  font-size: 0.85rem;
+  color: #9ec5e8;
+  text-decoration: none;
+}
+
+.sidebar-footer a:hover {
+  color: #fff;
+}
+
+.main {
+  flex: 1;
+  padding: 1.75rem 2rem 2.5rem;
+  overflow-x: auto;
+}
+
+.main-header {
+  margin-bottom: 1.75rem;
+}
+
+.main-header h1 {
+  margin: 0;
+  font-size: 1.65rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.main-header .date-line {
+  margin: 0.35rem 0 0;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+
+/* —— Cards —— */
+.section-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  margin: 0 0 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.slot-day {
+  margin-bottom: 2rem;
+}
+
+.slot-day h2 {
+  margin: 0 0 1rem;
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1rem;
+}
+
+.appointment-card {
+  background: var(--surface);
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  padding: 1.25rem 1.35rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.appointment-card .time-label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--accent);
+}
+
+.appointment-card .time-value {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.status-pill {
+  display: inline-flex;
+  align-items: center;
+  align-self: flex-start;
+  padding: 0.35rem 0.75rem;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.status-pill.booked {
+  background: var(--success-bg);
+  color: var(--success-text);
+}
+
+.status-pill.available {
+  background: var(--neutral-bg);
+  color: var(--neutral-text);
+}
+
+.status-pill.completed {
+  background: #e8eaf0;
+  color: #37474f;
+}
+
+.status-pill.slot-line {
+  text-transform: none;
+  white-space: normal;
+  max-width: 100%;
+  line-height: 1.35;
+}
+
+.attend-form {
+  margin-top: 0.5rem;
+  padding-top: 0.85rem;
+  border-top: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.attend-label {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--text-muted);
+}
+
+.attend-input {
+  padding: 0.5rem 0.65rem;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-size: 0.9rem;
+  background: #fafcfe;
+}
+
+.attend-input:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+.btn-attend {
+  align-self: flex-start;
+  padding: 0.45rem 1rem;
+  border: none;
+  border-radius: 8px;
+  background: var(--sidebar);
+  color: #fff;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.btn-attend:hover {
+  background: var(--sidebar-hover);
+}
+
+.followup-form {
+  margin-top: 0.5rem;
+  padding-top: 0.85rem;
+  border-top: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.followup-label {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--text-muted);
+}
+
+.followup-input {
+  padding: 0.5rem 0.65rem;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-size: 0.9rem;
+  background: #fafcfe;
+  max-width: 100%;
+}
+
+.followup-input:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+.btn-followup {
+  align-self: flex-start;
+  padding: 0.45rem 1rem;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface);
+  color: var(--sidebar);
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.btn-followup:hover {
+  background: var(--accent-soft);
+}
+
+/* Placeholder pages */
+.placeholder-panel {
+  background: var(--surface);
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  padding: 2rem;
+  max-width: 560px;
+}
+
+.placeholder-panel h2 {
+  margin: 0 0 0.5rem;
+  font-size: 1.2rem;
+}
+
+.placeholder-panel p {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 0.95rem;
+}
+
+.patients-panel {
+  background: var(--surface);
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  padding: 0;
+  max-width: 720px;
+  overflow-x: auto;
+}
+
+.patient-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+}
+
+.patient-table thead {
+  background: var(--accent-soft);
+}
+
+.patient-table th {
+  text-align: left;
+  padding: 0.75rem 1.25rem;
+  font-weight: 600;
+  color: var(--text);
+  border-bottom: 1px solid var(--border);
+}
+
+.patient-table td {
+  padding: 0.85rem 1.25rem;
+  border-bottom: 1px solid var(--border);
+  color: var(--text);
+}
+
+.patient-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.patient-table tbody tr:hover {
+  background: #fafcfe;
+}
+
+.patient-table .cell-id {
+  font-weight: 600;
+  color: var(--accent);
+  width: 4rem;
+}
+
+.patient-table .cell-phone {
+  color: var(--text-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+/* —— Reception desk —— */
+.reception-page {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 1.75rem 1.5rem 2.5rem;
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  color: var(--text);
+  background: var(--bg);
+  min-height: 100vh;
+}
+
+.reception-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.reception-top h1 {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.reception-sub {
+  margin: 0.35rem 0 0;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+
+.reception-logout {
+  font-size: 0.9rem;
+  color: var(--sidebar);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.reception-logout:hover {
+  text-decoration: underline;
+}
+
+.reception-alert {
+  padding: 0.65rem 1rem;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+  background: #fff8e6;
+  border: 1px solid #f0e0b0;
+  color: var(--text);
+}
+
+.reception-alert-success {
+  background: var(--success-bg);
+  border-color: #c8e6c9;
+  color: var(--success-text);
+}
+
+.reception-alert-error {
+  background: #fdecea;
+  border-color: #f5c6c2;
+  color: #c62828;
+}
+
+.reception-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.25rem;
+  margin-bottom: 1.5rem;
+}
+
+.reception-panel {
+  background: var(--surface);
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  padding: 1.35rem 1.5rem;
+}
+
+.reception-panel-wide {
+  max-width: 100%;
+}
+
+.reception-panel h2 {
+  margin: 0 0 1rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.reception-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.rf-label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  margin-top: 0.35rem;
+}
+
+.rf-label:first-of-type {
+  margin-top: 0;
+}
+
+.rf-input {
+  padding: 0.55rem 0.75rem;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-size: 0.95rem;
+  background: #fafcfe;
+}
+
+.rf-input:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+.rf-btn {
+  margin-top: 0.75rem;
+  padding: 0.6rem 1rem;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+}
+
+.rf-btn-primary {
+  background: var(--sidebar);
+  color: #fff;
+}
+
+.rf-btn-primary:hover {
+  background: var(--sidebar-hover);
+}
+
+.reception-table-wrap {
+  overflow-x: auto;
+}
+
+.reception-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+.reception-table th {
+  text-align: left;
+  padding: 0.65rem 0.75rem;
+  background: var(--accent-soft);
+  font-weight: 600;
+  border-bottom: 1px solid var(--border);
+}
+
+.reception-table td {
+  padding: 0.65rem 0.75rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.reception-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.reception-empty {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 0.95rem;
+}
+
+@media (max-width: 768px) {
+  .app-shell {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding: 1rem;
+    align-items: center;
+  }
+
+  .sidebar-brand {
+    border: none;
+    margin: 0;
+    padding: 0 1rem 0 0;
+  }
+
+  .sidebar-nav {
+    flex-direction: row;
+    flex-wrap: wrap;
+    flex: 1;
+    padding: 0;
+  }
+
+  .sidebar-footer {
+    border: none;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    margin-top: 0.75rem;
+  }
+}

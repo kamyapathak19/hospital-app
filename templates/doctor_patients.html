@@ -1,0 +1,40 @@
+{% extends "doctor_base.html" %}
+{% block title %}Patients{% endblock %}
+{% block content %}
+<header class="main-header">
+  <h1>Patients</h1>
+  <p class="date-line">All patients registered in the system.</p>
+</header>
+
+{% if patients %}
+<div class="patients-panel">
+  <table class="patient-table">
+    <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Name</th>
+        <th scope="col">Age</th>
+        <th scope="col">Date of birth</th>
+        <th scope="col">Phone</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for p in patients %}
+      <tr>
+        <td class="cell-id">{{ p.id }}</td>
+        <td class="cell-name">{{ p.name }}</td>
+        <td>{% if p.get('age', '') == '' %}—{% else %}{{ p.age }}{% endif %}</td>
+        <td>{% if p.get('date_of_birth') %}{{ p.date_of_birth }}{% else %}—{% endif %}</td>
+        <td class="cell-phone">{{ p.phone }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% else %}
+<div class="placeholder-panel">
+  <h2>No patients yet</h2>
+  <p>Add patients in your app data to see them listed here.</p>
+</div>
+{% endif %}
+{% endblock %}
